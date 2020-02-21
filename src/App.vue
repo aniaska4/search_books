@@ -18,6 +18,7 @@
         </v-text-field>
         </v-flex>
       <v-btn
+        color="green"
         text @click="catchThis"
       >
        <span class="mr-2">Search</span>

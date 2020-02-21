@@ -16,7 +16,7 @@
           </v-card-title>
 
           <v-card-actions class="justify-center">
-            <v-btn flat color="green" @click="singleBook(books.id)">View</v-btn>
+            <v-btn flat color="green" @click="singleBook(book.id)">View</v-btn>
           </v-card-actions>
 
         </v-card>
@@ -41,6 +41,11 @@ export default {
                 response => {this.books = response.data.items
                 console.log(response.data.items)
                 })
+    },
+    methods: {
+      singleBook(id) {
+        this.$router.push('/book/' + id)
+      }
     }
 }
 </script>

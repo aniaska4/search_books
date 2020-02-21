@@ -21,7 +21,7 @@ export default new VueRouter({
         component: SearchBooks
       },
       {
-        path: '/book/',
+        path: '/book/:id',
         name: 'SingleBook',
         props: true,
         component: SingleBook

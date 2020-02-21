@@ -35,7 +35,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('https://www.googleapis.com/books/v1/volumes?q=anna')
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=id:" + this.id)
             .then(response => {
                 console.log(response)
                 this.allBooks = response.data.items

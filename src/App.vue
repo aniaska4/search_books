@@ -10,6 +10,9 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <span style='cursor: pointer' class="mr-2" @click="favourite">Favorite</span>
+      <v-icon color="blue darken-2">fas fa-heart</v-icon>
+      <v-spacer></v-spacer>
       <v-flex xs12 sm6 md3>
         <v-text-field
           label='Books name'
@@ -17,11 +20,8 @@
           >
         </v-text-field>
         </v-flex>
-      <v-btn
-        color="green"
-        text @click="catchThis"
-      >
-       <span class="mr-2">Search</span>
+      <v-btn color="green" text @click="catchThis" >
+      <span class="mr-2">Search</span>
       </v-btn>
     </v-toolbar>
 
@@ -46,6 +46,9 @@ export default {
       console.log(this.name)
       this.$router.push('/search/:' + this.name)
       this.name = ''
+    },
+    favourite(){
+      this.$router.push('/favourite')
     }
     
   }

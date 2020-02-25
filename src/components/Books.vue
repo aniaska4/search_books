@@ -17,6 +17,8 @@
 
           <v-card-actions class="justify-center">
             <v-btn flat color="green" @click="singleBook(book.id)">View</v-btn>
+            <v-spacer></v-spacer>
+            <v-icon @click="markAsFavorite" :style="{color: clickedColor}">fas fa-heart</v-icon>
           </v-card-actions>
 
         </v-card>
@@ -31,7 +33,9 @@ export default {
     data () {
         return {
             allBooks: [],
-            books: []
+            books: [],
+            mark: true,
+            clickedColor: 'red'
         }
     },
     mounted() {
@@ -47,6 +51,15 @@ export default {
     methods: {
         singleBook(id) {
             this.$router.push('/book/' + id)
+        },        
+        markAsFavorite() {
+            if(this.mark) {
+                this.clickedColor = 'gray'
+
+            } else {
+                this.clickedColor = "red"
+            }
+            this.mark !== this.mark
         },
         bookAuthors(allBooks) {
             let authors = allBooks.volumeInfo.authors;
@@ -60,8 +73,8 @@ export default {
                 authors += lastAuthor
             }
             return authors
-            }
-        }
+        },
+    }
 }
 </script>
 

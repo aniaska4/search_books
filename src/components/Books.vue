@@ -1,7 +1,7 @@
 <template lang="pug">
   <v-container v-else grid-list-xl>
     <v-layout wrap>
-      <v-flex xs4 mb-2 v-for="book in allBooks">
+      <v-flex xs4 mb-2 v-for="book, index in allBooks">
         <v-card>
           <v-img  aspect-ratio="1" :src=" 'http://books.google.com/books/content?id=' + book.id + '&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api'"></v-img>
 
@@ -18,7 +18,7 @@
           <v-card-actions class="justify-center">
             <v-btn flat color="green" @click="singleBook(book.id)">View</v-btn>
             <v-spacer></v-spacer>
-            <v-icon @click="markAsFavorite" :style="{color: clickedColor}">fas fa-heart</v-icon>
+            <i @click="markAsFavorite()" :class="{isActive: isMark}" class="fas fa-heart"></i>
           </v-card-actions>
 
         </v-card>
@@ -34,8 +34,7 @@ export default {
         return {
             allBooks: [],
             books: [],
-            mark: true,
-            clickedColor: 'red'
+            isMark: false,
         }
     },
     mounted() {
@@ -53,13 +52,7 @@ export default {
             this.$router.push('/book/' + id)
         },        
         markAsFavorite() {
-            if(this.mark) {
-                this.clickedColor = 'gray'
-
-            } else {
-                this.clickedColor = "red"
-            }
-            this.mark !== this.mark
+            this.isMark = !this.isMark
         },
         bookAuthors(allBooks) {
             let authors = allBooks.volumeInfo.authors;
@@ -77,5 +70,12 @@ export default {
     }
 }
 </script>
+
+<style>
+.isActive{
+    color: red;
+}
+</style>
+
 
 // 

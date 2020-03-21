@@ -18,7 +18,7 @@
           <v-card-actions class="justify-center">
             <v-btn flat color="green" @click="singleBook(book.id)">View</v-btn>
             <v-spacer></v-spacer>
-            <i @click="markAsFavorite()" :class="{isActive: isMark}" class="fas fa-heart"></i>
+            <i @click="markAsFavorite(book)" :class="{isActive: book.isMark}" class="fas fa-heart"></i>
           </v-card-actions>
 
         </v-card>
@@ -34,14 +34,14 @@ export default {
         return {
             allBooks: [],
             books: [],
-            isMark: false,
         }
     },
     mounted() {
         axios.get("https://www.googleapis.com/books/v1/volumes?q=id:" + this.id)
             .then(response => {
                 console.log(response)
-                this.allBooks = response.data.items
+                this.allBooks = response.data.items.map(item => ({...item, isMark: false}))
+                console.log(this.allBooks)
             })
             .catch(error => {
                 console.log(error)
@@ -51,8 +51,8 @@ export default {
         singleBook(id) {
             this.$router.push('/book/' + id)
         },        
-        markAsFavorite() {
-            this.isMark = !this.isMark
+        markAsFavorite(book) {
+            book.isMark = !book.isMark
         },
         bookAuthors(allBooks) {
             let authors = allBooks.volumeInfo.authors;
